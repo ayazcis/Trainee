@@ -7,11 +7,18 @@ public class CollectibleItems : MonoBehaviour
 {
 
     private ScoreBar scoreBar;
-
+    private float leftScreenEdge;
+    private float rightScreenEdge;
+    private float topScreenEdge;
+    private float bottomScreenEdge;
 
     // Start is called before the first frame update
     void Start()
     {
+        leftScreenEdge = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
+        rightScreenEdge = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
+        topScreenEdge = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y;
+        bottomScreenEdge = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y;
         scoreBar = FindObjectOfType<ScoreBar>();
     }
 
@@ -49,10 +56,7 @@ public class CollectibleItems : MonoBehaviour
 
     private void DestroyItemWhenOffScreem()
     {
-        float leftScreenEdge = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
-        float rightScreenEdge = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
-        float topScreenEdge = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y;
-        float bottomScreenEdge = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y;
+    
         if (transform.position.x < leftScreenEdge || transform.position.x > rightScreenEdge 
             ||transform.position.y < bottomScreenEdge || transform.position.y > topScreenEdge)
         {
