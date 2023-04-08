@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class WizardWand : MonoBehaviour
 {
-    public GameObject collectibleItemPrefab;
-    public GameObject unCollectibleItemPrefab;
+    [SerializeField] GameObject collectibleItemPrefab;
+    [SerializeField] GameObject unCollectibleItemPrefab;
 
-    public float throwingPower = 10f;
-    public float throwingDistance = 2f;
-    public float throwingAngle = 45f;
-    public float throwUpAngleLimit = 45f;
-    public float throwDownAngleLimit = -45f;
-    public float itemProductionTime = 2f;
-    public float itemProductionAmount = 1f;
-    public float randomBombItem = 5f;
-    public float randomItemSpeedMin = 500f;
-    public float randomItemSpeedMax = 1000f;
+    [SerializeField] float throwingPower = 10f;
+    [SerializeField] float throwingDistance = 2f;
+    [SerializeField] float throwingAngle = 45f;
+    [SerializeField] float throwUpAngleLimit = 45f;
+    [SerializeField] float throwDownAngleLimit = -45f;
+    [SerializeField] float itemProductionTime = 2f;
+    [SerializeField] float itemProductionAmount = 1f;
+    [SerializeField] float randomBombItem = 5f;
+    [SerializeField] float randomItemSpeedMin = 500f;
+    [SerializeField] float randomItemSpeedMax = 1000f;
 
     private float nextItemTime = 0f;
 
