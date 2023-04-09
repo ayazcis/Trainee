@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Sonat : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private Animator anim;
+	public AudioSource sonat;
+	private void Awake()
+	{
+		anim = GetComponent<Animator>();
+	}
+	private void OnMouseEnter()
+	{
+		anim.SetBool("hovered", true);
+		sonat.Play();
+	}
+	private void OnMouseDown()
+	{
+		SceneManager.LoadScene(5);
+	}
 }
