@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class WizardWand : MonoBehaviour
 {
-    [SerializeField] GameObject collectibleItemPrefab;
-    [SerializeField] GameObject unCollectibleItemPrefab;
+    [SerializeField] List<GameObject> collectibleItemPrefab;
+    [SerializeField] List<GameObject> unCollectibleItemPrefab;
 
-    [SerializeField] float throwingPower = 10f;
-    [SerializeField] float throwingDistance = 2f;
-    [SerializeField] float throwingAngle = 45f;
-    [SerializeField] float throwUpAngleLimit = 45f;
-    [SerializeField] float throwDownAngleLimit = -45f;
-    [SerializeField] float itemProductionTime = 2f;
+    [SerializeField] float throwingPower = 800f;
+    [SerializeField] float throwingDistanceX = 0f;
+    [SerializeField] float throwingDistanceY = 0f;
+    [SerializeField] float throwingAngle = 10f;
+    [SerializeField] float throwUpAngleLimit = 17f;
+    [SerializeField] float throwDownAngleLimit = -17f;
+    [SerializeField] float itemProductionTime = 1f;
     [SerializeField] float itemProductionAmount = 1f;
     [SerializeField] float randomBombItem = 5f;
     [SerializeField] float randomItemSpeedMin = 500f;
     [SerializeField] float randomItemSpeedMax = 1000f;
-
+    private Rigidbody2D rb;
     private float nextItemTime = 0f;
-
+    private Vector2 throwingDirection;
+    Renderer itemRenderer;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,27 +40,32 @@ public class WizardWand : MonoBehaviour
 
     private void ThrowItem()
     {
-        Vector3 throwingPosition = new Vector3(transform.position.x - throwingDistance, transform.position.y, transform.position.z);
+        Vector3 throwingPosition = new Vector3(transform.position.x - throwingDistanceX, transform.position.y - throwingDistanceY, transform.position.z);
         float randomItem = Random.Range(0f, 100f);
         GameObject item;
-        for (int i = 0; i< itemProductionAmount; i++)
+        for (int i = 0; i < itemProductionAmount; i++)
         {
             if (randomItem < randomBombItem)
             {
-                item = Instantiate(unCollectibleItemPrefab, throwingPosition, Quaternion.identity);
+                item = Instantiate(unCollectibleItemPrefab[Random.Range(0, unCollectibleItemPrefab.Count)], throwingPosition, Quaternion.identity);
+                itemRenderer = item.GetComponent<Renderer>();
+                itemRenderer.material.color = new Color32(243, 151, 151, 255);
             }
             else
             {
-                item = Instantiate(collectibleItemPrefab, throwingPosition, Quaternion.identity);
+                item = Instantiate(collectibleItemPrefab[Random.Range(0, collectibleItemPrefab.Count)], throwingPosition, Quaternion.identity);
             }
-            Rigidbody2D rb = item.GetComponent<Rigidbody2D>();
+           
+            
+            rb = item.GetComponent<Rigidbody2D>();
 
             // firlatma yönü hesapla
             float throwingAngle1 = Random.Range(-throwingAngle, throwingAngle);
             float throwingDirectionX = -Mathf.Cos(throwingAngle1 * Mathf.Deg2Rad);
             float throwingDirectionY = Mathf.Sin(throwingAngle1 * Mathf.Deg2Rad);
             float throwingDirectionUp = Random.Range(throwDownAngleLimit, throwUpAngleLimit);
-            Vector2 throwingDirection = new Vector2(throwingDirectionX, throwingDirectionY);
+            throwingDirection.x = throwingDirectionX;
+            throwingDirection.y = throwingDirectionY;
             throwingDirection = Quaternion.Euler(0f, 0f, throwingDirectionUp) * throwingDirection;
             throwingPower = Random.Range(randomItemSpeedMin, randomItemSpeedMax);
 

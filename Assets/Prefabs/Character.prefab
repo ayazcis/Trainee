@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4202228960053969554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.22, y: 3.68, z: 0}
-  m_LocalScale: {x: 2.257, y: 2.1345, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,14 +97,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be14751a2fab07e45a7996d3fbd4960c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectibleItemPrefab: {fileID: 6216581455498146148, guid: ceae544722fc4ac4daf5ab43b826ca50, type: 3}
-  unCollectibleItemPrefab: {fileID: 6216581455498146148, guid: 9acd927ac3f73584ca7bce498d2652aa, type: 3}
+  collectibleItemPrefab:
+  - {fileID: 4683907375620947576, guid: 1373283034eea504c990a074a21b2c3b, type: 3}
+  - {fileID: 2461901426372328964, guid: a1235281268046040a05a5209d31afa3, type: 3}
+  - {fileID: 7827669950732150318, guid: 0ca0f3fcf92f85d429ab6185bee85cfd, type: 3}
+  - {fileID: 3725839442507421543, guid: e349b1e123076044da0086fb397218b8, type: 3}
+  unCollectibleItemPrefab:
+  - {fileID: 444338820917565223, guid: e27b5c408c5540b429ef40062e572fed, type: 3}
+  - {fileID: 2536752465579466728, guid: e70292bac390fb241be1ad9fdd394366, type: 3}
   throwingPower: 800
-  throwingDistance: 0
+  throwingDistanceX: 0
+  throwingDistanceY: 0
   throwingAngle: 10
   throwUpAngleLimit: 17
   throwDownAngleLimit: -17
-  itemProductionTime: 1
+  itemProductionTime: 0.9
   itemProductionAmount: 1
   randomBombItem: 5
   randomItemSpeedMin: 500
