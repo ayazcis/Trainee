@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ScoreBar : MonoBehaviour
 {
@@ -30,5 +31,10 @@ public class ScoreBar : MonoBehaviour
     {
             gameScore += incScoreAmount;
             scoreBar.fillAmount = gameScore;
+        Debug.Log(gameScore);
+            if(gameScore >= 1)
+		{
+            SceneManager.LoadScene(6);
+		}
     }
 }
