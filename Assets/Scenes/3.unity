@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1528042969}
     m_Modifications:
+    - target: {fileID: 260947290700751746, guid: cf9579c88abf6584b8cbc877ae8c0b6c, type: 3}
+      propertyPath: decScoreAmount
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 260947290700751746, guid: cf9579c88abf6584b8cbc877ae8c0b6c, type: 3}
+      propertyPath: incScoreAmount
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 3733630304389453781, guid: cf9579c88abf6584b8cbc877ae8c0b6c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

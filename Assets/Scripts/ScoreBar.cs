@@ -7,6 +7,8 @@ public class ScoreBar : MonoBehaviour
 {
     public float gameScore = 0f;
     public Image scoreBar;
+    [SerializeField] float incScoreAmount=0.05f;
+    [SerializeField] float decScoreAmount=0.05f;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +23,12 @@ public class ScoreBar : MonoBehaviour
 
     public void decreaseScore()
     {
-            gameScore -= 0.1f;
+            gameScore -= decScoreAmount;
             scoreBar.fillAmount = gameScore;
     }
     public void increaseScore()
     {
-            gameScore += 0.1f;
+            gameScore += incScoreAmount;
             scoreBar.fillAmount = gameScore;
     }
 }
