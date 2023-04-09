@@ -124,9 +124,10 @@ MonoBehaviour:
   - {fileID: 2461901426372328964, guid: a1235281268046040a05a5209d31afa3, type: 3}
   - {fileID: 7827669950732150318, guid: 0ca0f3fcf92f85d429ab6185bee85cfd, type: 3}
   - {fileID: 3725839442507421543, guid: e349b1e123076044da0086fb397218b8, type: 3}
-  unCollectibleItemPrefab:
   - {fileID: 444338820917565223, guid: e27b5c408c5540b429ef40062e572fed, type: 3}
   - {fileID: 2536752465579466728, guid: e70292bac390fb241be1ad9fdd394366, type: 3}
+  unCollectibleItemPrefab:
+  - {fileID: 895384601235382848, guid: d8763ec3263b5194da912338acc27efa, type: 3}
   throwingPower: 800
   throwingDistanceX: 0
   throwingDistanceY: 0

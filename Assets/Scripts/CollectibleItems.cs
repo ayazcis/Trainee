@@ -13,6 +13,9 @@ public class CollectibleItems : MonoBehaviour
     private float topScreenEdge;
     private float bottomScreenEdge;
     private Animator animator;
+    [SerializeField] GameObject gameObject1;
+    private Animator animator1;
+
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,7 @@ public class CollectibleItems : MonoBehaviour
         bottomScreenEdge = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y;
         scoreBar = FindObjectOfType<ScoreBar>();
         animator = GetComponent<Animator>();
+        animator1 = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -50,6 +54,7 @@ public class CollectibleItems : MonoBehaviour
                 rb.isKinematic = true;
                 gameObject.GetComponent<Renderer>().material.color = Color.white;
                 animator.SetBool("isDestroyed", true);
+                animator1.SetBool("isAttacked", true);
                 animLength = animator.GetCurrentAnimatorStateInfo(0).length;
                 StartCoroutine(DestroyAfterAnimation(gameObject, animLength));
                 if (scoreBar.gameScore != 100f)
@@ -63,6 +68,7 @@ public class CollectibleItems : MonoBehaviour
                 rb.isKinematic = true;
                 gameObject.GetComponent<Renderer>().material.color = Color.white;
                 animator.SetBool("isDestroyed", true);
+                animator1.SetBool("isAttacked", true);
                 animLength = animator.GetCurrentAnimatorStateInfo(0).length;
                 StartCoroutine(DestroyAfterAnimation(gameObject, animLength));
                 if (scoreBar.gameScore != 0f)
