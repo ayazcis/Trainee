@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class CollectibleItems : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class CollectibleItems : MonoBehaviour
     private float rightScreenEdge;
     private float topScreenEdge;
     private float bottomScreenEdge;
-
+    private Animator animator;
+    private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class CollectibleItems : MonoBehaviour
         topScreenEdge = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y;
         bottomScreenEdge = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y;
         scoreBar = FindObjectOfType<ScoreBar>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -30,7 +33,7 @@ public class CollectibleItems : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        //Instantiate(patlamaEfekti, transform.position, Quaternion.identity);
+        //
         DestroyItem(gameObject);
 
     }
@@ -38,18 +41,35 @@ public class CollectibleItems : MonoBehaviour
     private void DestroyItem(GameObject gameObject)
     {
         Debug.Log("Clicked");
-        if (gameObject.CompareTag("Collectible"))
+        float animLength;
+        switch (gameObject.tag)
         {
-            Debug.Log("Collectible");
-            Destroy(gameObject);
-            scoreBar.increaseScore();
-        }
-        else if (gameObject.CompareTag("UnCollectible"))
-        {
-            Debug.Log("UnCollectible");
-            Destroy(gameObject);
-            scoreBar.decreaseScore();
-
+            case "Collectible":
+                rb = gameObject.GetComponent<Rigidbody2D>();
+                rb.velocity = Vector2.zero;
+                rb.isKinematic = true;
+                gameObject.GetComponent<Renderer>().material.color = Color.white;
+                animator.SetBool("isDestroyed", true);
+                animLength = animator.GetCurrentAnimatorStateInfo(0).length;
+                StartCoroutine(DestroyAfterAnimation(gameObject, animLength));
+                if (scoreBar.gameScore != 100f)
+                {
+                    scoreBar.increaseScore();
+                }
+                break;
+            case "UnCollectible":
+                rb = gameObject.GetComponent<Rigidbody2D>();
+                rb.velocity = Vector2.zero;
+                rb.isKinematic = true;
+                gameObject.GetComponent<Renderer>().material.color = Color.white;
+                animator.SetBool("isDestroyed", true);
+                animLength = animator.GetCurrentAnimatorStateInfo(0).length;
+                StartCoroutine(DestroyAfterAnimation(gameObject, animLength));
+                if (scoreBar.gameScore != 0f)
+                {
+                    scoreBar.decreaseScore();
+                }
+                break;
         }
 
     }
@@ -66,5 +86,11 @@ public class CollectibleItems : MonoBehaviour
                 scoreBar.decreaseScore();
             }
         }
+    }
+
+    IEnumerator DestroyAfterAnimation(GameObject gameObject, float animLength)
+    {
+        yield return new WaitForSeconds(animLength);
+        Destroy(gameObject);
     }
 }
